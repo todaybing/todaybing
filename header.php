@@ -25,6 +25,7 @@ $auth = new Auth($accessKey, $secretKey);
 $token = $auth->uploadToken($bucket);
 // 初始化 UploadManager 对象并进行文件的上传。
 $uploadMgr = new UploadManager();
+list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
 ?>
 <!doctype html>
 <html class="no-js">
