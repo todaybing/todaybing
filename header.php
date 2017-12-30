@@ -97,8 +97,7 @@ list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
             </a>
             <ul class="am-dropdown-content">
 			    <li class="am-divider"></li>
-                <li><a href="http://5kvideo.cc" target="_blank">影院</a></li>
-		        <li><a href="https://www.lylares.com" target="_blank">博客</a></li>
+                <li><a href="" target="_blank">XXX</a></li>
             </ul>
         </li>
     </ul>
