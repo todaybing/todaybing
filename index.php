@@ -121,12 +121,12 @@ $arr=array_slice($arr,$pg*9,9);
 		$api='https://api.lylares.com/bing/json/'.$nam.'.json';
         $json_string = file_get_contents($api); 
         $apiData = json_decode($json_string, true); 
+	$story=$apiData['story'];
+	$ms=$apiData['title'];
+	$cp=$apiData['provider'];
         if($nam==$apiData['date']){
-			$story=$apiData['story'];
-			$ms=$apiData['title'];
-			$cp=$apiData['provider'];
 			$ct=$apiData['Country'];
-		    $city=$apiData['City'];
+		        $city=$apiData['City'];
 			$Continent=$apiData['Continent'];
 			$seh=$apiData['search'];
 			$seh=str_replace('http','https',$seh);
