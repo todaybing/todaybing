@@ -8,8 +8,8 @@
         <div class="am-footer-miscs">
             <p>由 <span class="am-icon-skyatlas "></span><a href="https://lylares.com/" title="LYLARES'S BLOG" target="_blank" class="">LYLARES'S BLOG</a>
             提供技术支持</p>
-            <p>© 1993-<?php echo date('Y');?> LYLARES'S BLOG. ALL RIGHTS RESERVED.</p>
-            <p>渝ICP备17005042号-1</p>
+            <p>© XXXX  ALL RIGHTS RESERVED.</p>
+            <p>备案号</p>
         </div>
 </footer>
 <!-- 滚动加载插件 -->
