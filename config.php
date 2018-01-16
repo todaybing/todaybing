@@ -3,13 +3,13 @@
 $webConfig = array(
     'siteurl' => '',    // 网站网址如：https://bing.lylares.com/
     'name' => '',    // 网站名称
-    'slogan' => '来自一个伪科技宅的实验室作品-LYLARES\'S LAB',    // 网站口号 
+    'slogan' => '',    // 网站口号 
     'keywords' => '',//关键词
     'description' => '',//描述
 	///about页面使用
     'avatar' => '',//头像url
     'avaurl' => '',    //点击头像跳转url
-	'nina' => '@LYLARES',//昵称
+	'nina' => '',//昵称
 );
 //七牛云配置（必须）
 $qnurl = '';//七牛云bucket空间根域名比如：https://sta.lylares.com/
@@ -24,7 +24,7 @@ $key = $ima;// 上传到七牛后保存的文件名，当前按照本地图片�
 
 //首页通知配置
 $message = array (
-'content' =>'本站图片调用请参考...【<a style="color:#2387f5;" href="https://www.lylares.com/the-new-site-of-bing-everyday-gallery.html" target="_blank">全新的必应每日壁纸图片站</a>】',
+'content' =>'',
 
 );
 
@@ -40,7 +40,7 @@ $info = array(
 ),
   '1' =>array(
     'time' => '2017-12-14 ',
-	'content' => '关于接口可参考...【<a style="color:red;"href=\'https://www.lylares.com/the-new-site-of-bing-everyday-gallery.html\' target="_blank">全新的必应每日壁纸图片站</a>】',
+	'content' => '',
 
 ),
 );
@@ -48,7 +48,7 @@ $info = array(
 $pay = array (
     'state' => '1',//开关，默认打开，state为空则关闭打赏
 	'title' => '支付宝',
-	'url' => '//static.lylares.com/images/ali_pay.jpg',
+	'url' => '',
 	'title1' => '微信',	//第二种
-	'url1' => '//static.lylares.com/images/wechat_pay.jpg',
+	'url1' => '',
 	);
