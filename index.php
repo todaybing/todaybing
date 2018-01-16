@@ -118,7 +118,7 @@ $arr=array_slice($arr,$pg*9,9);
         $str=$arr[$j]["key"];
 		$url=$qnurl.$str;
 		$nam=str_replace('.jpg','',$str);
-		$api='https://api.lylares.com/bing/json/'.$nam.'.json';
+		$api='https://api.lylares.com/bing/api.php?AppId=$apk&AccessKey=$ack'.$nam;
         $json_string = file_get_contents($api); 
         $apiData = json_decode($json_string, true); 
 	$story=$apiData['story'];
