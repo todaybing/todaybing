@@ -1,6 +1,8 @@
 <?php
 // 网站的一些基础设置
 $webConfig = array(
+    'AppId'=>'Your AppId',///来自open.lylares.com的必应接口授权，请前往申请授权
+    'AccessKey'=>'Your AccessKey',///来自open.lylares.com的必应接口授权，请前往申请授权
     'siteurl' => '',    // 网站网址如：https://bing.lylares.com/
     'name' => '',    // 网站名称
     'slogan' => '',    // 网站口号 
@@ -9,8 +11,10 @@ $webConfig = array(
 	///about页面使用
     'avatar' => '',//头像url
     'avaurl' => '',    //点击头像跳转url
-	'nina' => '',//昵称
+    'nina' => '',//昵称
+  
 );
+
 //七牛云配置（必须）
 $qnurl = '';//七牛云bucket空间根域名比如：https://sta.lylares.com/
 $accessKey = '';//七牛云accessKey
