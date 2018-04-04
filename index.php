@@ -1,14 +1,7 @@
 <?php    
-error_reporting(0);
-require_once('con_qn.php');
-require_once('header.php');
-echo "<script>
- function downfile(str){
-        window.location.href=str;
-    }
-</script>";
+include('header.php');
 ?>
-<!-- 重写样式 by LYLARES -->
+<!-- 重写样式 by lylares.com -->
 <style>
 .web-name {
     color: #0c8484!important;
@@ -27,6 +20,7 @@ echo "<script>
   box-shadow: 0 0.0625rem 0.125rem rgba(0,0,0,.1);
   border-radius: .125rem;
 }
+
 .btn-play-source {
     margin: 0 5px 5px 0;
 }
@@ -39,7 +33,7 @@ echo "<script>
     height: auto;
     color: #444;
     cursor: pointer;
-}
+} 
 .am-pureview-bar .am-pureview-title {
 	word-wrap: break-word; 
     word-break: normal; 
@@ -55,10 +49,10 @@ echo "<script>
     -webkit-appearance: menulist;
     -moz-appearance: menulist;
 }
-.am-pagination-select .am-disabled {
+ .am-pagination-select .am-disabled {
     background-color: #F9F9F9;
     cursor: not-allowed;
-}
+} 
 .am-alert{
 	margin:0px 9px 0px 9px;
 }
@@ -92,132 +86,92 @@ echo "<script>
 	background-color:#999;
 	border-radius: .125rem;
 }
+.am-pagination {
+    text-align: center;
+}
 </style>
 
 <div class="am-container">
-
+  <!-- 通知消息，config.php里配置 -->
   <?php 
+  $states=$message['states'];
   $message=$message['content'];
+  if($states == 1){
   echo  
-   "<div class=\"am-alert am-alert-secondary\" data-am-alert>
-  <button type=\"button\" class=\"am-close\">&times;</button>
-  <p>$message</p>
-   </div>"; 
+   "<div class='am-alert am-alert-success' data-am-alert>
+      <button type='button' class='am-close'>&times;</button>
+      <p>$message</p>
+    </div>
+	";   
+  }
    ?>
-
-    <form class="am-form" id="filter-form">
-    <input type="text" name="p" id="movie-p" class="am-hide">
-    </form>
+   <!-- 通知消息结束 -->
 	<!--图片区--->
- <ul data-am-widget="gallery" class="am-gallery am-avg-sm-1  am-avg-md-2 am-avg-lg-3  am-gallery-bordered"  data-am-gallery="{pureview:{weChatImagePreview: false}}">
+ <ul data-am-widget="gallery" class="am-gallery am-avg-sm-1  am-avg-md-2 am-avg-lg-3  am-gallery-bordered"  data-am-gallery="{pureview:{Preview: 1,weChatImagePreview: false}}">
 <?php 
 $arr=array_slice($arr,$pg*9,9);
-    if($p==$maxPage){$itm=$num;}
-         else  $itm=9;
+    if($p>$maxPage){
+		 echo  
+   "<div class='am-alert am-alert-warning' data-am-alert>
+      <button type='button' class='am-close'>&times;</button>
+      <p>太超前了吧o(╯□╰)o...未能找到美图..</p>
+    </div>
+	";
+	} else {
+    if($p==$maxPage){
+	  $itm=$num;
+	} else {
+	  $itm=$pageStyle['pageno'];
+	} 
         for($j=0; $j<$itm; $j++) {	
         $str=$arr[$j]["key"];
 		$url=$qnurl.$str;
 		$nam=str_replace('.jpg','',$str);
-		$api='https://api.lylares.com/bing/api.php?AppId='.$webConfig['AppId'].'&AccessKey='.$webConfig['AccessKey'].$nam;
-        $json_string = file_get_contents($api); 
-        $apiData = json_decode($json_string, true); 
-	$story=$apiData['story'];
-	$ms=$apiData['title'];
-	$cp=$apiData['provider'];
+		if($AppKey !=''){
+		$apk='AppKey='.$AppKey;	
+		} else {
+		$apk='AppId='.$AppId;		
+		}
+		$api='https://api.lylares.com/bing/api.php?'.$apk.'&id='.$nam;//原图片信息接口
+        $apiData = apiCallback($api); 
+        $apiData = json_decode($apiData, true); 
+		$ms=$apiData['title'];
+		$story=$apiData['story'];
+		$cp=$apiData['provider'];
         if($nam==$apiData['date']){
+			$nam= strtotime($nam);
+			$nam=date('Y年m月d日',$nam);
 			$ct=$apiData['Country'];
-		        $city=$apiData['City'];
+		    $city=$apiData['City'];
 			$Continent=$apiData['Continent'];
-			$seh=$apiData['search'];
-			$seh=str_replace('http','https',$seh);
-			echo "
-				<li>
-                  <div class='am-gallery-item' title='$ms'>
-                      <img src='$url'   alt='$story' /><button type='button'  onclick=\"window.open('$seh')\" class='am-sbtn am-btn-primary am-radius am-fr' title=''><span class='am-icon-search'></span>搜索</button> 
-                    <h3 class='am-gallery-title'>$ms</h3>   
-                    <div class='am-gallery-desc'>$cp </br><span class='am-badge am-badge am-radius'>$nam</span> <span class='am-badge am-radius'>$Continent</span> <span class='am-badge am-radius'>$ct</span> <span class='am-badge am-radius'>$city</span><button type='button' class='am-dbtn am-btn-primary am-radius am-fr' title=''  onclick=\"downfile('https://resources.lylares.com/bing/download.php?fn=$str');\"><span class='am-icon-cloud-download'></span>立即下载</button></div>
-                    </a>
-                  </div>
-                </li>
-				";	
+			//$originBigImgurl=$apiData['image'];//bing原始1920*1080图片地址，某些地址已失效故此地址弃用
+			echoToindex($ms,$nam,$url,$story,$cp,$Continent,$ct,$city,$str);
+	
 		}   
          	else {
-			echo "
-				<li>
-                  <div class='am-gallery-item' title=\"来自LYLARES'S LAB\">
-                      <img  src='$url'   alt='$nam' />
-                    <h3 class='am-gallery-title'>哇，太久了..找不到了o(╯□╰)o</h3>
-                    <div class='am-gallery-desc'>© Microsoft LYLARES/Test/Bing Images</br><span class='am-badge am-badge  am-radius'>$nam</span>     <button type='button' class='am-dbtn am-btn-primary am-radius am-fr'  title=''  onclick=\"downfile('https://resources.lylares.com/bing/download.php?fn=$str');\"><span class='am-icon-cloud-download'></span>立即下载</button></div>
-                    </a>
-                  </div>
-                </li>
-				";	}    
-}      
+			$Continent=$apiData['location'][0][0];		
+			$ct=$apiData['location'][0][1];
+		    $city=$apiData['location'][0][2];	
+			echoToindex($ms,$nam,$url,$story,$cp,$Continent,$ct,$city,$str);
+				}    
+}  
+}    
         ?>
   </ul>
-  <!--图片区结束--->
-  
-  <!--翻页按钮--->
-    <ul data-am-widget="pagination" class="am-pagination am-pagination-select" >
-        <li class="am-pagination-prev" id="prevPage">
-            上一页
-        </li>  
-        <li class="am-pagination-select">
-            <select id="selectPage"></select>
-        </li>
-        <li class="am-pagination-next" id="nextPage">
-            下一页
-        </li>
-    </ul>
-  <!--翻页按钮结束--->
-</div>  <!-- 容器 -->
-
-<script type="text/javascript">
-var pageInfo = {
-    curPage: <?php echo $p; ?>,     // 当前页码
-    maxPage: <?php echo $maxPage; ?>    // 最大的页码
-}
-$(function() {
-    // 循环添加页码
-    for(var i=1; i<=pageInfo.maxPage; i++) {
-        $("#selectPage").append('<option value="'+i+'">第 '+i+' 页</option>');
-    }
-    $("#selectPage").val(pageInfo.curPage);
-    
-    // 页码选择器改变自动跳转
-    $("#selectPage").change(function(){
-        goPage($('#selectPage').val());
-    });
-    
-    // 上下翻页功能
-    if(pageInfo.curPage < 1) {
-        $("#prevPage").addClass("am-disabled");
-    }
-    if(pageInfo.curPage >= pageInfo.maxPage) {
-        $("#nextPage").addClass("am-disabled");
-    }
-    $("#prevPage").click(function() {
-        if(pageInfo.curPage > 1) goPage((parseInt(pageInfo.curPage)-1));
-    });
-    $("#nextPage").click(function() {
-        if(pageInfo.curPage < pageInfo.maxPage) goPage((parseInt(pageInfo.curPage)+1));
-    });
-    
-    // 跳转至指定页码
-    function goPage(newPage) {
-        $("#movie-p").val(newPage);
-        $("#filter-form").submit();
-		
-    }  
-    // 监听筛选表单变化
-    $(".filter-change-listen").change(function() {
-        $("#filter-form").submit();
-    });  
-});
-    // 保留版权可好
-    console.log('来自LYLARES\'S BLOG');
-    console.info('Version 1.0, Designed by www.lylares.com.');
-   // console.error('版权所有，即将开源！');	
-</script>
-<!-- 页脚 -->
-<?php require_once('footer.php');?>
+  <!--图片区结束---> 
+  <!-- 分页处理  -->
+  <div id="bing-page"></div>
+  <script>
+  var page = window.location.search.match(/page=(\d+)/);
+    $("#bing-page").page({
+        pages:<?  echo $maxPage;?>,
+        curr:page?page[1]:1,
+		first: "首页", //设置false则不显示，默认为false  
+        last: "尾页", //设置false则不显示，默认为false 
+        jump:window.location.href.split('?')[0]+"?page=%page%"
+    })     
+  </script>
+<!-- 分页处理  -->
+ 
+</div> <!-- 容器结束--> 
+<? include('footer.php');?>
