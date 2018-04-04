@@ -65,21 +65,6 @@ $pageStyle = array (
 
 
 ```
-- header.php文件
-以下主要用于保存bing图片到本地，
-```
-$path='images'.'/';//定义保存本地的图片路径
-if(!file_exists($path)){mkdir($path,0777);}
-$pathurl =$path.'/'.date('Ymd').'.jpg';//拼接本地图片路径名称，此处图片名称要和config.php中$ima保存一致
-if(!is_file($pathurl)){
-$str=file_get_contents('http://cn.bing.com/HPImageArchive.aspx?idx=0&n=1');
- if(preg_match("/<urlBase>(.+?)<\/urlBase>/ies",$str,$matches)){
-  $imgurl='http://s.cn.bing.com'.$matches[1].'_1920x1080.jpg';
-  copy($imgurl,$pathurl);
- }
-}
-```
-
 #### 参考
 
 - [全新的必应美图图片站](https://www.lylares.com/the-new-site-of-bing-everyday-gallery.html)
