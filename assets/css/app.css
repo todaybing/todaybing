@@ -1,0 +1,294 @@
+@charset "utf-8";
+
+body {
+    background-color: #f4f4f4;
+    font-size: 14px;
+}
+
+.am-container {
+    max-width: 1200px;
+}
+
+/* 顶部导航栏背景色 */
+.am-topbar {
+    background: #fff;
+}
+/* 左上角站标颜色 */
+.web-name {
+    color: #2387f5!important;
+}
+
+/* 顶部观看记录 */
+@media only screen and (max-width: 640px) {
+    .am-dropdown {
+        display: block;
+    }
+}
+
+.am-slides {
+    background-color: #000;
+}
+
+/* 标题栏去缩进 */
+.am-titlebar-default {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.friend-links>div>a {
+    margin-right: 10px;
+}
+
+/* 电影展示块 */
+.movie-description, .movie-title, .movie-tags, .right-list li a {
+    transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+}
+.movie-item {
+    display: block;
+    width: 100%;
+    max-width: 178px;
+    height: 232px;
+    cursor: pointer;
+    margin: 10px auto;
+}
+.movie-cover {
+    width: 100%;
+    height: 178px;
+    position: relative;
+    overflow: hidden;
+}
+.movie-cover>img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+@media only screen and (max-width: 550px) {
+    .movie-item {
+        height: 212px;
+    }
+    .movie-cover {
+        height: 158px;
+    }
+}
+@media only screen and (max-width: 500px) {
+    .movie-item {
+        height: 192px;
+    }
+    .movie-cover {
+        height: 138px;
+    }
+}
+@media only screen and (max-width: 450px) {
+    .movie-item {
+        height: 172px;
+    }
+    .movie-cover {
+        height: 118px;
+    }
+}
+@media only screen and (max-width: 400px) {
+    .movie-item {
+        height: 152px;
+    }
+    .movie-cover {
+        height: 98px;
+    }
+    /*.am-avg-sm-3>li {*/
+    /*    width: 50%;*/
+    /*}*/
+    /*.am-avg-sm-3>li:nth-of-type(2n+1) {*/
+    /*    clear: both;*/
+    /*} */
+}
+.movie-description {
+    position: absolute;
+    width: 100%;
+    bottom: -51px;
+    height: 75px;
+}
+.movie-description>.description-bg {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.6;
+    filter: alpha(opacity=60);
+}
+.movie-description>p {
+    height: 24px;
+    line-height: 24px;
+    overflow: hidden;
+    margin: 0 10px;
+    color: #fff;
+    font-size: 12px;
+    position: relative;
+}
+.movie-item:hover .movie-description {
+    bottom: 0;
+}
+.movie-title {
+    background-color: #fff;
+    width: 100%;
+    padding: 5px 0;
+    position: relative;
+}
+.movie-item:hover>.movie-title {
+    background-color: #f60;
+    color: #fff;
+}
+.movie-item:hover>.movie-name {
+    background-color: #ff2262;
+    color: #fff;
+}
+.movie-title>p {
+    font-size: 14px;
+    padding: 0 10px;
+    margin: 0;
+    height: 22px;
+    line-height: 22px;
+    overflow: hidden;
+    text-align: center;
+}
+.movie-title>.movie-tags {
+    font-size: 12px;
+    color: #999;
+}
+.movie-item:hover>.movie-title>.movie-tags {
+    color: #fff;
+}
+
+/* 自动隐藏多出的两个 */
+@media only screen and (min-width: 1025px) {
+    .index-container .movie-lists li:nth-last-child(2), .index-container .movie-lists li:nth-last-child(1) {
+        display: none!important;
+    }
+    /*.tv-lists li:nth-child(16),.tv-lists li:nth-child(17),.tv-lists li:nth-child(18) {*/
+    /*    display: none!important;*/
+    /*}*/
+}
+
+@media only screen and (min-width: 640px) and (max-width: 1025px) {
+    .tv-lists li:nth-child(19),.tv-lists li:nth-child(20) {
+        display: none!important;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    /*.tv-lists li:nth-child(17),.tv-lists li:nth-child(18) {*/
+    /*    display: none!important;*/
+    /*}*/
+}
+
+.tv-lists .movie-item { 
+    height: auto;
+}
+
+.tv-lists .movie-cover {
+    height: auto;
+    max-height: 100px;
+}
+
+/* 右侧列表 */
+.right-list {
+    padding-left: 0;
+    margin-top: 10px;
+}
+.right-list li {
+    background-color: #fdfdfd;
+    padding: 0 10px;
+    list-style: none;
+}
+.right-list li a {
+    display: block;
+    line-height: 44px;
+    color: #555;
+}
+.right-list li a:hover {
+    color: #f60;
+}
+
+.right-list .r-l-right {
+    float: right;
+    font-size: 12px;
+    color: #999;
+    display: inline-block;
+    margin-left: 10px;
+}
+/* 右侧列表排行 */
+.right-list li:nth-child(1) .am-round {
+    background-color: #dd514c;
+}
+.right-list li:nth-child(2) .am-round {
+    background-color: #F37B1D;
+}
+.right-list li:nth-child(3) .am-round {
+    background-color: #5eb95e;
+}
+
+/* 首页上次播放 */
+#last-watch a {
+    color: #DD514C;
+}
+
+/* 播放器盒子 */
+.player-box {
+    height: 600px;
+    padding: 0;
+    background: #000 url(../i/loading.gif) no-repeat center;
+}
+@media only screen and (max-width: 600px) {
+    .player-box {
+        height: 300px;
+    }
+}
+
+/*弹动效果*/
+.hover-bounce:hover {
+    -webkit-animation:bounce 1s .1s ease both;
+    -moz-animation:bounce 1s .1s ease both;
+}
+@-webkit-keyframes bounce {
+    0% {
+        -webkit-transform:scale(1)
+    }
+    10%, 20% {
+        -webkit-transform:scale(0.8) rotate(-2deg)
+    }
+    30%, 50%, 70%, 90% {
+        -webkit-transform:scale(1.1) rotate(2deg)
+    }
+    40%, 60%, 80% {
+        -webkit-transform:scale(1.1) rotate(-2deg)
+    }
+    100% {
+        -webkit-transform:scale(1) rotate(0)
+    }
+}
+
+/* 底部导航栏 */ 
+.am-navbar .am-navbar-nav, .am-navbar-default .am-navbar-actions {
+    background-color: #fff;
+    border-top: 1px solid #eee;
+}
+
+.am-navbar-default .am-navbar-actions a {
+    border-bottom: 0;
+}
+
+.am-navbar-default a {
+    color: #868686;
+}
+.am-navbar-nav a .am-navbar-label {
+    padding-top: 4px;
+}
+@media only screen and (min-width: 640px) {
+    .am-with-fixed-navbar {
+        padding-bottom: 0;
+    }
+}
