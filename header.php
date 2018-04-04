@@ -1,31 +1,41 @@
-<?php 
-//error_reporting(0);
+<? 
+error_reporting(0);
+header("Cache-Control: public"); 
+header("Pragma: cache"); 
+$offset = 60*60*6; // cache 1 day 
+$ExpStr = "Expires: ".gmdate("D, d M Y H:i:s", time() + $offset)." GMT"; 
+header($ExpStr); 
+include('config_qn.php');
+include('inc/functions.php'); 
+//分页处理  
+$arr=array_reverse($ret['items']);
+//页码
+$p = intval(getParam('page', '1')); 
+if($p == '') $p = '1';
+$pg=$p-1;
+if (count($arr)%9 == 0 ){
+	$maxPage=count($arr)/9; 
+}
+$maxPage=ceil((count($arr)+1)/9); 
+$num=count($arr)/9;
+$num=explode(".",$num);
+$num=substr($num[1],1,1);
+//分页处理完成
 include('config.php');
-//处理bing接口图存储在本地 
-$path='images'.'/';
+//处理bing图存储并上传到七牛 
 if(!file_exists($path)){mkdir($path,0777);}
-$pathurl =$path.'/'.date('Ymd').'.jpg';
-if(!is_file($pathurl)){
+if(!is_file($filePath)){
 $str=file_get_contents('http://cn.bing.com/HPImageArchive.aspx?idx=0&n=1');
  if(preg_match("/<urlBase>(.+?)<\/urlBase>/ies",$str,$matches)){
   $imgurl='http://s.cn.bing.com'.$matches[1].'_1920x1080.jpg';
   copy($imgurl,$pathurl);
  }
-}
 //上传本地图到七牛云
-require_once __DIR__ . '/qn/autoload.php';
-require_once('config.php');
-// 引入鉴权类
-use Qiniu\Auth;
-// 引入上传类
-use Qiniu\Storage\UploadManager;
-// 构建鉴权对象
-$auth = new Auth($accessKey, $secretKey);
-// 生成上传 Token
 $token = $auth->uploadToken($bucket);
 // 初始化 UploadManager 对象并进行文件的上传。
 $uploadMgr = new UploadManager();
 list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+}
 ?>
 <!doctype html>
 <html class="no-js">
@@ -35,13 +45,13 @@ list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
     <meta name="description" content="<?php echo $webConfig['description']; ?>">
     <meta name="keywords" content="<?php echo $webConfig['keywords']; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title><?php echo $webConfig['name'];?>-<?php echo $webConfig['slogan'];?></title>
+    <title><?php echo $webConfig['sitename'];?>-<?php echo $webConfig['slogan'];?></title>
     <!-- Set render engine for 360 browser -->
     <meta name="renderer" content="webkit">
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
        
-    <link rel="icon" type="image/png" href="https://static.lylares.com/images/bing.ico">
+    <link rel="icon" type="image/png" href="">
     
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
@@ -50,26 +60,27 @@ list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name="apple-mobile-web-app-title" content="必应美图"/>
+    <meta name="apple-mobile-web-app-title" content="<?php echo $webConfig['sitename'];?>"/>
     <link rel="apple-touch-icon-precomposed" href="">
     
     <!-- Tile icon for Win8 (144x144 + tile color) -->
     <meta name="msapplication-TileImage" content="">
     <meta name="msapplication-TileColor" content="#0e90d2">
     
-    <link rel="stylesheet" href="https://static.lylares.com/wd/assets/css/amazeui.min.css">
-    <link rel="stylesheet" href="https://static.lylares.com/wd/assets/css/app.css">
-  
+    <link rel="stylesheet" href="assets/css/amazeui.min.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+
     <!--[if (gte IE 9)|!(IE)]><!-->
-    <script src="https://static.lylares.com/wd/assets/js/jquery.min.js"></script>
+    <script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/amazeui.min.js"></script>
+    <script type="text/javascript" src="static/js/amazeui.page.js"></script>
     <!--<![endif]-->
-    
+ 
     <!--[if lte IE 8 ]>
     <script src="https://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
     <script src="https://static.lylares.com/wd/assets/js/amazeui.ie8polyfill.min.js"></script>
     <![endif]-->
-
 </head>
 <body>
 
@@ -78,7 +89,7 @@ list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
     <h1 class="am-topbar-brand hover-bounce">
         <a href="../" class="web-name">
 <!--             <span class="am-icon-film am-icon-md"></span> 
- -->           必应美图           
+ -->           <? echo $webConfig['sitename']; ?>           
         </a>
     </h1>
 
@@ -89,17 +100,7 @@ list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
 
   <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
     <ul class="am-nav am-nav-pills am-topbar-nav">
-        <li><a href="./" >首页</a></li>
-		<li><a href="about.php" >关于</a></li>
-        <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-                更多 <span class="am-icon-caret-down"></span>
-            </a>
-            <ul class="am-dropdown-content">
-			    <li class="am-divider"></li>
-                <li><a href="" target="_blank">XXX</a></li>
-            </ul>
-        </li>
+        <li><a href="../" >首页</a></li>
     </ul>
   </div>
   </div>
