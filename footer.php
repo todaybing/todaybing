@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
     // 保留版权可好
-console.info('来自LYLARES\'S BLOG，Version 1.2, 目前整站已经开源，请参考https://www.lylares.com/the-new-site-of-bing-everyday-gallery.html Designed by www.lylares.com.');	
+console.info('来自LYLARES\'S BLOG，Version 1.1, 目前整站已经开源，请参考https://www.lylares.com/the-new-site-of-bing-everyday-gallery.html Designed by www.lylares.com.');	
 </script>
 </body>
 </html>
