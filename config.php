@@ -1,58 +1,49 @@
 <?php
 // 网站的一些基础设置
 $webConfig = array(
-    'AppId'=>'Your AppId',///来自open.lylares.com的必应接口授权，请前往申请授权
-    'AccessKey'=>'Your AccessKey',///来自open.lylares.com的必应接口授权，请前往申请授权
-    'siteurl' => '',    // 网站网址如：https://bing.lylares.com/
-    'name' => '',    // 网站名称
+    'siteurl' => '',    // 网站网址如：https://bing.lylares.com
+    'sitename' => '',    // 网站名称
     'slogan' => '',    // 网站口号 
     'keywords' => '',//关键词
     'description' => '',//描述
-	///about页面使用
-    'avatar' => '',//头像url
-    'avaurl' => '',    //点击头像跳转url
-    'nina' => '',//昵称
-  
+	'copyright' => '',//版权信息
+	'beian' => '',///备案号
 );
+//在open.lylares.com新申请的AppKey或者以前申请的旧的AppId，配置其中一个即可
+$AppKey='';
+$AppId='';
+//
 
-//七牛云配置（必须）
-$qnurl = '';//七牛云bucket空间根域名比如：https://sta.lylares.com/
-$accessKey = '';//七牛云accessKey
-$secretKey = '';//七牛云secretKey
-$bucket = '';//七牛云bucket空间名称
-$limit = '100000';//需要从七牛云读取的图片张数
-$ima=date('Ymd').'.jpg';// 要上传的本地图片名称,当前以年月日：20171214
-$filePath ='images/'.$ima;// 要上传文件的本地路径
-$key = $ima;// 上传到七牛后保存的文件名，当前按照本地图片名称上传
-//七牛云配置结束
+/*七牛云配置*/
+//七牛云bucket空间根域名 ,例如：https://bing.lylares.com/
+$qnurl = '';
+//七牛云accessKey 
+$accessKey = '';
+//七牛云secretKey
+$secretKey = '';
+//七牛云bucket空间名称
+$bucket = '';
+//需要从七牛云读取的图片张数
+$limit = '1000000';
+// 要上传文件的本地图片名称，目前以时间序列命名，不建议修改
+$ima=date('Ymd').'.jpg';
+// 要上传文件的本地路径，[bing/images/] 这部分目录你可以更改但是请拼接 $ima 以构造图片完整本地路径,无需手动创建
+$path= 'bing/images/';
+$filePath =$path.$ima; 
+// 上传到七牛后保存的文件名，不建议更改
+$key = $ima;
+/*七牛云配置结束*/
 
-//首页通知配置
+
+/*首页通知配置*/
 $message = array (
-'content' =>'',
-
+'states' =>0,//开关消息，0默认关闭消息，1打开消息
+'content' =>'温馨提示：',
 );
+/*首页通知配置*/
 
-
-//关于页面消息配置
-$info = array(
-   //数字为消息顺序，数字越大消息越靠前 time 为发布时间； content为将要发布的内容；
-  //消息设置
-  '2' =>array(
-    'time' => '2017-12-15 ',
-	'content' => '所有的图片都可以直接下载，默认分辨率为：1920*1080',
-
-),
-  '1' =>array(
-    'time' => '2017-12-14 ',
-	'content' => '',
-
-),
+/*样式配置*/
+$pageStyle = array (
+  'pageno'  => 9, //每页显示图片数 3的整数倍最佳，否则自己修改css
 );
-//打赏设置已经弃用
-$pay = array (
-    'state' => '1',//开关，默认打开，state为空则关闭打赏
-	'title' => '支付宝',
-	'url' => '',
-	'title1' => '微信',	//第二种
-	'url1' => '',
-	);
+/*样式配置*/
