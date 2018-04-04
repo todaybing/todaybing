@@ -1,7 +1,7 @@
 <?php    
 include('header.php');
 ?>
-<!-- 重写样式 by lylares.com -->
+<!-- 重写样式 By lylares.com -->
 <style>
 .web-name {
     color: #0c8484!important;
