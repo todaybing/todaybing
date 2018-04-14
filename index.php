@@ -174,4 +174,4 @@ $arr=array_slice($arr,$pg*9,9);
 <!-- 分页处理  -->
  
 </div> <!-- 容器结束--> 
-<? include('footer.php');?>
+<?php include('footer.php');?>
