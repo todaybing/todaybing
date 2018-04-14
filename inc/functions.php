@@ -1,4 +1,4 @@
-<?
+<?php
    function getParam($key,$default='')
 {
     return trim($key && is_string($key) ? (isset($_POST[$key]) ? $_POST[$key] : (isset($_GET[$key]) ? $_GET[$key] : $default)) : $default);
@@ -43,3 +43,4 @@ function apiCallback($url){
     curl_close($ch); 
     return $content; 
 }
+?>
