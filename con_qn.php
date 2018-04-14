@@ -13,3 +13,5 @@ $marker = '';
 // 本次列举的条目数
 $delimiter = '/';
 list($ret, $err) = $bucketManager->listFiles($bucket, $prefix, $marker, $limit, $delimiter);
+?>
+
