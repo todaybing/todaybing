@@ -1,4 +1,4 @@
-<? 
+<?php
 error_reporting(0);
 header("Cache-Control: public"); 
 header("Pragma: cache"); 
