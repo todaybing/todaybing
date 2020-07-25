@@ -127,12 +127,7 @@ $arr=array_slice($arr,$pg*9,9);
         $str=$arr[$j]["key"];
 		$url=$qnurl.$str;
 		$nam=str_replace('.jpg','',$str);
-		if($AppKey){
-		$apk='app_key='.$app_key;	
-		} else {
-		$apk='AppId ='.$AppId;		
-		}
-		$api='https://api.berryapi.net/?service=app.bing.story&app_key='.$apk.'&id='.$nam;//原图片信息接口
+		$api='https://api.berryapi.net/?service=app.bing.story&app_key='.$app_key.'&id='.$nam;//原图片信息接口
         $apiData = apiCallback($api); 
         $apiData = json_decode($apiData, true); 
 		$ms=$apiData['title'];
