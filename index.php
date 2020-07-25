@@ -96,7 +96,7 @@ include('header.php');
   <?php 
   $states=$message['states'];
   $message=$message['content'];
-  if($states == 1){
+  if(isset($states)){
   echo  
    "<div class='am-alert am-alert-success' data-am-alert>
       <button type='button' class='am-close'>&times;</button>
@@ -127,12 +127,12 @@ $arr=array_slice($arr,$pg*9,9);
         $str=$arr[$j]["key"];
 		$url=$qnurl.$str;
 		$nam=str_replace('.jpg','',$str);
-		if($AppKey !=''){
-		$apk='AppKey='.$AppKey;	
+		if($AppKey){
+		$apk='app_key='.$app_key;	
 		} else {
-		$apk='AppId='.$AppId;		
+		$apk='AppId ='.$AppId;		
 		}
-		$api='https://api.lylares.com/bing/api.php?'.$apk.'&id='.$nam;//原图片信息接口
+		$api='https://api.berryapi.net/?service=app.bing.story&app_key='.$apk.'&id='.$nam;//原图片信息接口
         $apiData = apiCallback($api); 
         $apiData = json_decode($apiData, true); 
 		$ms=$apiData['title'];
