@@ -10,8 +10,8 @@ $webConfig = array(
 	'beian' => '',///备案号
 );
 //在open.lylares.com新申请的AppKey或者以前申请的旧的AppId，配置其中一个即可
-$AppKey='';
-$AppId='';
+$app_key='';
+//$AppId='';
 //
 
 /*七牛云配置*/
