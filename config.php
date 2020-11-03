@@ -1,7 +1,7 @@
 <?php
 // 网站的一些基础设置
 $webConfig = array(
-    'siteurl' => '',    // 网站网址如：https://bing.lylares.com
+    'siteurl' => '',    // 网站网址如：https://www.todaybing.com
     'sitename' => '',    // 网站名称
     'slogan' => '',    // 网站口号 
     'keywords' => '',//关键词
@@ -15,7 +15,7 @@ $app_key='';
 //
 
 /*七牛云配置*/
-//七牛云bucket空间根域名 ,例如：https://bing.lylares.com/
+//七牛云bucket空间根域名 ,例如：https://www.todaybing.com/
 $qnurl = '';
 //七牛云accessKey 
 $accessKey = '';
