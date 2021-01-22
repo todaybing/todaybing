@@ -6,6 +6,7 @@
 2.代码结构更新，配置config.php即可
 
 #### 示例网站
+原演示站已关闭，现推荐另一个体验更好的：
 https://www.todaybing.com
 
 #### 要求
